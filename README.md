@@ -47,5 +47,5 @@ graph TD
    ```
 
 ## 🧠 Academic Connection
-This project implements security principles discussed in my published research on AI in Cybersecurty Compliance and Montioring regarding data integrity and adversarial patterns in machine learning environments.
+This project implements security principles discussed in my published research on AI in Cybersecurity Auditing and Compliance Monitoring regarding data integrity and adversarial patterns in machine learning environments.
 
