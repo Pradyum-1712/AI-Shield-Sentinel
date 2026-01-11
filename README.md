@@ -2,23 +2,37 @@
 
 AI-Shield is a containerized microservices architecture designed to protect Large Language Models (LLMs) from **Adversarial Prompt Injections** and **Jailbreak attacks**. 
 
-This project bridges the gap between **AI/ML Research** and **Cybersecurity Engineering**, providing a secure middleware layer that sanitizes and validates user prompts before they reach the inference engine.
+## 🏗️ System Architecture
+
+```mermaid
+graph TD
+    User((User/Attacker)) -->|Sends Prompt| Frontend[Streamlit Web UI]
+    Frontend -->|REST API Request| Backend[FastAPI Security Sentinel]
+    
+    subgraph Security_Engine [Security Sentinel Logic]
+        Backend -->|1. Pattern Match| Heuristics[Regex & Heuristic Analysis]
+        Heuristics -->|2. Validate| Sanitizer[Input Sanitization]
+    end
+    
+    Sanitizer -->|If Malicious| DB[(PostgreSQL Threat Log)]
+    Sanitizer -->|If Safe| LLM((External LLM/Core AI))
+    
+    DB -.->|Audit Trail| Admin[Security Dashboard]
+```
+
+[Image of a professional software architecture diagram showing a 3-tier system: Streamlit Frontend, FastAPI Backend, and PostgreSQL Database connected via Docker networks]
 
 ## 🚀 Key Features
 - **Security Sentinel:** FastAPI-based backend that uses heuristic analysis to detect malicious prompt patterns (e.g., Payload Splitting, DAN-mode, and System Overrides).
 - **Microservices Architecture:** Orchestrated using Docker Compose, featuring isolated Frontend, Backend, and Database layers.
-- **Threat Intelligence:** Every blocked attack is persisted to a **PostgreSQL** database for forensic auditing and trend analysis.
-- **M2 Optimized:** Specifically configured for Apple Silicon (ARM64) high-performance containerization.
+- **Threat Intelligence:** Every blocked attack is persisted to a **PostgreSQL** database for forensic auditing.
+- **M2 Optimized:** Tailored for Apple Silicon (ARM64) high-performance containerization.
 
 ## 🛠️ Tech Stack
-- **Frontend:** Streamlit (Python)
-- **Backend:** FastAPI (Asynchronous Python)
+- **Frontend:** Streamlit
+- **Backend:** FastAPI
 - **Database:** PostgreSQL 15
 - **Infrastructure:** Docker & Docker Compose
-- **Security Logic:** Regular Expression Heuristics & Input Sanitization
-
-## 📸 Architecture
-
 
 ## 🚦 How to Run (M2 Mac)
 1. **Clone the repo:**
@@ -30,9 +44,6 @@ This project bridges the gap between **AI/ML Research** and **Cybersecurity Engi
    ```bash
    docker compose up --build
    ```
-3. **Access the Gateway:**
-   - Frontend: http://localhost:8501
-   - API Docs: http://localhost:8000/docs
 
 ## 🧠 Academic Connection
 This project implements security principles discussed in my published research (IJRAR/Springer) regarding data integrity and adversarial patterns in machine learning environments.
