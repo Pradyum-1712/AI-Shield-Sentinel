@@ -1,3 +1,4 @@
+[![DevSecOps Sentinel Pipeline](https://github.com/Pradyum-1712/AI-Shield-Sentinel/actions/workflows/main.yml/badge.svg)](https://github.com/Pradyum-1712/AI-Shield-Sentinel/actions/workflows/main.yml)
 # 🛡️ AI-Shield Sentinel: End-to-End Secure LLM Gateway
 
 AI-Shield is a containerized microservices architecture designed to protect Large Language Models (LLMs) from **Adversarial Prompt Injections** and **Jailbreak attacks**. 
