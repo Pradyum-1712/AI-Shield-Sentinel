@@ -1,0 +1,28 @@
+name: DevSecOps Sentinel Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  security-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Python Static Analysis (Bandit)
+        run: |
+          pip install bandit
+          bandit -r . -f txt
+
+      - name: Scan Container for CVEs (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'python:3.11-slim'
+          format: 'table'
+          exit-code: '1' # This "Breaks the build" if critical bugs are found!
+          severity: 'CRITICAL,HIGH'
+
+      - name: Generate SBOM (Software Bill of Materials)
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+          trivy fs --format cyclonedx --output sbom.json .
