@@ -46,4 +46,5 @@ graph TD
    ```
 
 ## 🧠 Academic Connection
-This project implements security principles discussed in my published research (IJRAR/Springer) regarding data integrity and adversarial patterns in machine learning environments.
+This project implements security principles discussed in my published research IJRAR titled AgriTech - An innovative Farming Solution and AI in Cybersecurty Compliance and Montioring regarding data integrity and adversarial patterns in machine learning environments.
+
